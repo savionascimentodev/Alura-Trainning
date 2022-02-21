@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1>{{ title }}</h1>
-    <ul></ul>
+    <ul>
+      <li v-for="foto of fotos" :key="foto.id">
+        <img :src="foto.url" :alt="foto.titulo" />
+      </li>
+    </ul>
   </div>
 </template>
 

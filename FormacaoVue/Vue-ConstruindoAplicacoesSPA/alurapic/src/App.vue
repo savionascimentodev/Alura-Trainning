@@ -1,16 +1,21 @@
 <template>
-  <div>
-    <h1>{{ title }}</h1>
-    <ul>
-      <li v-for="foto of fotos" :key="foto.id">
-        <img :src="foto.url" :alt="foto.titulo" />
+  <div class="header">
+    <h1 class="title">{{ title }}</h1>
+    <ul class="list-fotos">
+      <li class="fotos-item" v-for="foto of fotos" :key="foto.id">
+        <Painel :titulo="foto.titulo">
+          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo" />
+        </Painel>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import Painel from "./components/Painel.vue";
+
 export default {
+  components: { Painel },
   data() {
     return {
       title: "AluraPic",
@@ -27,8 +32,21 @@ export default {
 </script>
 
 <style>
-img {
-  height: 260px;
-  width: 220px;
+.header {
+  font-family: Helvetica;
+  width: 96%;
+  margin: 0 auto;
+}
+.title {
+  text-align: center;
+}
+.list-fotos {
+  list-style: none;
+}
+.list-fotos .fotos-item {
+  display: inline-block;
+}
+.imagem-responsiva {
+  width: 100%;
 }
 </style>

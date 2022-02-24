@@ -1,10 +1,16 @@
 <template>
   <div class="header">
     <h1 class="title">{{ title }}</h1>
+    <input
+      v-model="filtro"
+      type="search"
+      class="filtro"
+      placeholder="Filtrar pelo titulo"
+    />
     <ul class="list-fotos">
-      <li class="fotos-item" v-for="foto of fotos" :key="foto.id">
+      <li class="fotos-item" v-for="foto of fotosComFitro" :key="foto.id">
         <Painel :titulo="foto.titulo">
-          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo" />
+          <ImagemResponsiva :url="foto.url" :titulo="foto.titulo" />
         </Painel>
       </li>
     </ul>
@@ -13,13 +19,15 @@
 
 <script>
 import Painel from "./components/Painel.vue";
+import ImagemResponsiva from "./components/ImagemResponsiva.vue";
 
 export default {
-  components: { Painel },
+  components: { Painel, ImagemResponsiva },
   data() {
     return {
       title: "AluraPic",
-      fotos: []
+      fotos: [],
+      filtro: ""
     };
   },
   created() {
@@ -27,6 +35,16 @@ export default {
     promise
       .then(response => response.json())
       .then(fotos => (this.fotos = fotos));
+  },
+  computed: {
+    fotosComFitro() {
+      if (this.filtro) {
+        let exp = new RegExp(this.filtro.trim(), "i");
+        return this.fotos.filter(foto => exp.test(foto.titulo));
+      } else {
+        return this.fotos;
+      }
+    }
   }
 };
 </script>
@@ -46,7 +64,8 @@ export default {
 .list-fotos .fotos-item {
   display: inline-block;
 }
-.imagem-responsiva {
+.filtro {
+  display: block;
   width: 100%;
 }
 </style>

@@ -11,6 +11,7 @@
       <li class="fotos-item" v-for="foto of fotosComFitro" :key="foto.id">
         <Painel :titulo="foto.titulo">
           <ImagemResponsiva :url="foto.url" :titulo="foto.titulo" />
+          <Botao type="button" rotulo="Remover" />
         </Painel>
       </li>
     </ul>
@@ -20,9 +21,10 @@
 <script>
 import Painel from "./Painel.vue";
 import ImagemResponsiva from "./ImagemResponsiva.vue";
+import Botao from "./Botao.vue";
 
 export default {
-  components: { Painel, ImagemResponsiva },
+  components: { Painel, ImagemResponsiva, Botao },
   data() {
     return {
       title: "AluraPic",

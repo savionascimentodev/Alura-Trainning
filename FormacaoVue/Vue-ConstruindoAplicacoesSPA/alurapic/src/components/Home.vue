@@ -11,7 +11,13 @@
       <li class="fotos-item" v-for="foto of fotosComFitro" :key="foto.id">
         <Painel :titulo="foto.titulo">
           <ImagemResponsiva :url="foto.url" :titulo="foto.titulo" />
-          <Botao type="button" rotulo="Remover" />
+          <Botao
+            type="button"
+            rotulo="Remover"
+            style="danger"
+            :confirmacao="true"
+            @botaoAtivado="remove(foto)"
+          />
         </Painel>
       </li>
     </ul>
@@ -32,12 +38,6 @@ export default {
       filtro: ""
     };
   },
-  created() {
-    let promise = this.$http.get("http://localhost:3000/v1/fotos");
-    promise
-      .then(response => response.json())
-      .then(fotos => (this.fotos = fotos));
-  },
   computed: {
     fotosComFitro() {
       if (this.filtro) {
@@ -46,6 +46,17 @@ export default {
       } else {
         return this.fotos;
       }
+    }
+  },
+  created() {
+    let promise = this.$http.get("http://localhost:3000/v1/fotos");
+    promise
+      .then(response => response.json())
+      .then(fotos => (this.fotos = fotos));
+  },
+  methods: {
+    remove(foto) {
+      alert("removido " + foto.titulo);
     }
   }
 };

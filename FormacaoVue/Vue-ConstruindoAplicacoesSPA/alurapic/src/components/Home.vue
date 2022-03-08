@@ -9,12 +9,12 @@
     />
     <ul class="list-fotos">
       <li class="fotos-item" v-for="foto of fotosComFitro" :key="foto.id">
-        <Painel :titulo="foto.titulo">
+        <Painel v-transform.animation:rotate.reverse="15" :titulo="foto.titulo">
           <ImagemResponsiva :url="foto.url" :titulo="foto.titulo" />
           <Botao
             type="button"
             rotulo="Remover"
-            style="danger"
+            styles="danger"
             :confirmacao="true"
             @botaoAtivado="remove(foto)"
           />

@@ -18,15 +18,15 @@ export default {
       type: Boolean,
       required: true
     },
-    style: {
+    styles: {
       type: String,
       required: true
     }
   },
   computed: {
     estiloBotao() {
-      if (this.style === "padrao" || !this.style) return "btn btn-padrao";
-      if (this.style === "danger") return "btn btn-danger";
+      if (this.styles === "padrao" || !this.styles) return "btn btn-padrao";
+      if (this.styles === "danger") return "btn btn-danger";
     }
   },
   methods: {
